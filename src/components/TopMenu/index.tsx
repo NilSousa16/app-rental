@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { DrawerActions } from 'react-navigation-drawer';
 
-import { Container } from './styles';
+import { Container, TouchButton } from './styles';
 
 function TopMenu() {
 
@@ -76,13 +76,13 @@ const NavigationDrawerStructure = (props) => {
         
         {/* <NavigationDrawerStructure navigationProps={this.navigation} />    */}
 
-        {/* <TouchButton 
+        <TouchButton 
           onPress={
             () => alert(`Botão pressionado`)
           } 
         >       
           <Icon name="menu" size={30} color="#fff" />
-        </TouchButton> */}
+        </TouchButton>
         
       </Container>
     </>

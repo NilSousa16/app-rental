@@ -78,4 +78,22 @@ export const TitleText = styled.Text`
   margin-bottom: 5px;
 `;
 
+export const CustomTouch = styled.TouchableHighlight`
+  align-items: center;
+
+  margin-left: 5px;
+  margin-right: 5px;
+
+  background-color: #a9a4b7;
+  border-radius: 5px;
+  
+`;
+
+export const TextButton = styled.Text`
+  font-size: 15px;
+  color: #fff;
+
+  padding: 7px
+`;
+
 

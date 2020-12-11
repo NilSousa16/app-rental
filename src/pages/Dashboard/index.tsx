@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../hooks/auth';
 
 import { 
@@ -7,8 +7,7 @@ import {
   TextInput, 
   Text, 
   FlatList, 
-  TouchableHighlight, 
-  Image } from 'react-native';
+  TouchableHighlight } from 'react-native';
 
 import { 
   Container, 
@@ -18,10 +17,13 @@ import {
   DescriptionItem, 
   NameItem, 
   Search, 
-  TitleText } from './styles';
+  TitleText,
+} from './styles';
   
 import { createStackNavigator } from '@react-navigation/stack';
+
 import TopMenu from '../../components/TopMenu';
+import CustomTouch from '../../components/CustomTouch';
 
 const PRODUCTSITENS = [
   {
@@ -110,12 +112,33 @@ const PRODUCTSITENS = [
   },
 ];
 
+/**
+* Usado para armazenar os valores de incidentes a serem apresentados em tela
+*/
+//const [incidents, setIncidents] = useState([]); 
+/**
+ * Forma que sobrescreve os dados a serem escritos
+ * setIncidents(response.data);
+ * 
+ * ...incidents, ...response.data - forma de anexar dois vetores em um
+ * único
+ */
+//setIncidents([...incidents, ...response.data]);
+
 const Dashboard: React.FC = () => {
   // function Dashboard() {
 
   const { user } = useAuth();
 
-  const [value, onChangeText] = React.useState('   Buscar item por nome');
+  const [value, onChangeText] = useState('   Buscar item por nome');
+
+  const [itensLocation, setItensLocation] = useState([]); 
+
+  const [text, setText] = useState([]);
+
+  // const onPress = () => {
+  //   setText('Novo');
+  // }
 
   const renderItem = ({item}) => {
     return (
@@ -129,7 +152,8 @@ const Dashboard: React.FC = () => {
           }
         } 
         onPress={
-          () => alert(`This is a button right! Seja bem-vindo ${user.name} ${item.id}`)
+          () => alert(`This is a button right! Seja bem-vindo ${user.name} ${item.id} 
+        ${itensLocation[0]} - ${itensLocation[1]} - ${itensLocation[2]} - ${itensLocation[3]} - ${itensLocation[4]} - ${itensLocation[5]} - ${itensLocation[6]} - ${itensLocation[7]} - ${itensLocation[8]} - ${itensLocation[9]} - ${itensLocation[10]}`)
         }
       >
 
@@ -146,14 +170,30 @@ const Dashboard: React.FC = () => {
               </NameItem>
             </DescriptionItem>
 
-            <View style={{paddingLeft: 5, paddingRight: 5}}>
-              <Button
-                onPress={() => alert(`Botão pressionado`)}
+            <CustomTouch />
+
+            {/* <CustomTouch 
+              style={{paddingLeft: 5, paddingRight: 5}}
+              
+              onPress={                  
+                () => {                    
+                  setText([text, 'ADICIONAR']);
+                  
+                  // alert(`Botão pressionado`);
+
+                  setItensLocation([...itensLocation, item.id]);
+                }
+              }  
+            >  
+              <TextButton>{text}</TextButton>  
+                        
+              
+            </CustomTouch> */}
+            {/* <Button
+                
                 title="Adicionar"
                 color="#a9a4b7"                
-              />
-            </View>
-
+              /> */}
           </ContainerInfo>
         </ContainerItem>
       </TouchableHighlight>
@@ -183,15 +223,16 @@ const Dashboard: React.FC = () => {
                 borderWidth: 1 
               }
             }
-            onChangeText={text => onChangeText(text)}
-            value={value}
+            //onChangeText={text => onChangeText(text)}
+            placeholder="   Buscar item por nome jkkh"
+            // value={value}
           />
         </Search>
 
         <Container>
           <FlatList
             data={PRODUCTSITENS}
-            renderItem={renderItem}
+            renderItem={true ? renderItem : renderItem}
             numColumns={2}
             keyExtractor={item => item.id}            
           />
