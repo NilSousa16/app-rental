@@ -96,4 +96,14 @@ export const TextButton = styled.Text`
   padding: 7px
 `;
 
+export const ButtonsArea = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding-left: 5px;
+  padding-bottom: 8px;
+
+  background-color: #312e38;;
+`;
+
 

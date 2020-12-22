@@ -1,21 +1,20 @@
-import React from 'react';
+// import { createStackNavigator } from '@react-navigation/stack';
+
+import React, { useEffect, useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAuth } from '../../hooks/auth';
 
 import { 
   Button, 
   View, 
-  TextInput, 
-  Text, 
   FlatList, 
   TouchableHighlight, 
-  Image,
   TouchableOpacity } from 'react-native';
 
 import CustomButton from '../../components/Button';
+import TopMenu from '../../components/TopMenu';
 
 import Icon from 'react-native-vector-icons/Feather';
-
-import { useNavigation } from '@react-navigation/native';
 
 import { 
   Container, 
@@ -26,9 +25,6 @@ import {
   SubTitle, 
   TitleText,
   ButtonsArea } from './styles';
-  
-import { createStackNavigator } from '@react-navigation/stack';
-import TopMenu from '../../components/TopMenu';
 
 const PRODUCTSITENS = [
   {
@@ -117,16 +113,42 @@ const PRODUCTSITENS = [
   },
 ];
 
-// const Dashboard: React.FC = () => {
-  function Solicitation() {
+const Solicitation: React.FC = () => {
+  // function Solicitation() {
 
   const { user } = useAuth();
 
-  const navigation = useNavigation();
+ 
 
-  const [value, onChangeText] = React.useState('   Buscar item por nome');
+  const navigation = useNavigation();  
 
-  const renderItem = ({item}) => {
+  const route = useRoute();
+
+  const [listItensLocation, setListItensLocation] = useState([]); 
+
+  useEffect(() => {
+      loadItensLocation();
+  }, [route.params.itensLocation]);
+
+  const loadItensLocation = () => {
+    var list = route.params.itensLocation;
+    setListItensLocation(list);
+  }
+
+  const removeItem = (idItem) => {
+    var listUpdated = [];
+
+    listItensLocation.forEach(
+      (item) => {
+        if(item.id !== idItem) {
+          listUpdated.push(item);
+        }
+      }
+    );
+    setListItensLocation(listUpdated);
+  }
+
+  const renderItem = ({item}) => {   
     return (
       <TouchableHighlight 
         style={
@@ -151,13 +173,13 @@ const PRODUCTSITENS = [
           <ContainerInfo>
             {/* <View style={{paddingLeft: 5, paddingRight: 5}}> */}
               <NameItem>
-                { item.title }
+                {item.id} - { item.title } 
               </NameItem>
             {/* </View> */}
 
             <View style={{paddingLeft: 5, paddingRight: 5}}>
               <Button
-                onPress={() => alert(`Remover item da solicitação`)}
+                onPress={() => removeItem(item.id)}
                 title="Remover"
                 color="#e63946"                
               />
@@ -181,7 +203,9 @@ const PRODUCTSITENS = [
 
           <TouchableOpacity 
             onPress={
-              () => navigation.navigate('Dashboard')
+              () => {                
+                navigation.navigate('Dashboard', { listItensLocation });                
+              }
             } 
           >       
             <Icon name="arrow-left" size={24} color="#c9c6d2" />
@@ -190,7 +214,7 @@ const PRODUCTSITENS = [
 
         <Container>
           <FlatList
-            data={PRODUCTSITENS}
+            data={listItensLocation}
             renderItem={renderItem}
             numColumns={1}
             keyExtractor={item => item.id}            
@@ -200,9 +224,10 @@ const PRODUCTSITENS = [
             <View style={{width: 170}}>
               <CustomButton style={{height: 40}}
                 onPress={
-                  () => alert(`Ir para página do contrato`)
-                }>
-                Finalizar
+                  () => navigation.navigate('Contract', { listItensLocation })
+                }
+              >
+                Avançar
               </CustomButton>
             </View>
 
@@ -215,11 +240,27 @@ const PRODUCTSITENS = [
                 Cancelar
               </CustomButton>
             </View>
+            
           </ButtonsArea>
         </Container>
-
-        
       </View>
+
+      {/* <Button
+        onPress={
+          () => {
+            console.log("<Solicitation>");
+            listItensLocation.forEach(
+              (item) => {     
+                console.log('>>>', item.id);
+              }
+            );
+            console.log("<Solicitation>");
+          }
+        }
+        title="Verificação"
+        color="#e63946"                
+      /> */}
+
     </>
   );
 };

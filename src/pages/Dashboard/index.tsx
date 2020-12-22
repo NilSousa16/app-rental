@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../hooks/auth';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { 
   Button, 
@@ -18,11 +19,13 @@ import {
   NameItem, 
   Search, 
   TitleText,
+  ButtonsArea
 } from './styles';
   
 import { createStackNavigator } from '@react-navigation/stack';
 
 import TopMenu from '../../components/TopMenu';
+import CustomButton from '../../components/Button';
 import CustomTouch from '../../components/CustomTouch';
 
 const PRODUCTSITENS = [
@@ -81,13 +84,13 @@ const PRODUCTSITENS = [
     section: 'Categoria do Produto',
   },
   {
-    id: '15',
+    id: '11',
     title: 'Betoneira Menegotti Prime 400 Litros',
     englishTitle: 'R$ 150,00 / dia',
     section: 'Categoria do Produto',
   },
   {
-    id: '16',
+    id: '12',
     title: 'Betoneira Menegotti Prime 400 Litros',
     englishTitle: 'R$ 150,00 / dia',
     section: 'Categoria do Produto',
@@ -126,19 +129,50 @@ const PRODUCTSITENS = [
 //setIncidents([...incidents, ...response.data]);
 
 const Dashboard: React.FC = () => {
-  // function Dashboard() {
+
+  const navigation = useNavigation();
 
   const { user } = useAuth();
 
-  const [value, onChangeText] = useState('   Buscar item por nome');
+  const route = useRoute();
 
-  const [itensLocation, setItensLocation] = useState([]); 
+  const [itensLocation, setItensLocation] = useState([]);
+  
+  const addItem = (idItem) => {
+    PRODUCTSITENS.forEach(
+      (item) => {
+        if(item.id === idItem) {
+          setItensLocation([...itensLocation, item]); 
+          
+          return null;
+        }
+      }     
+    );        
+  }
 
-  const [text, setText] = useState([]);
+  const removeItem = (idItem) => {
+    var newList = [];
 
-  // const onPress = () => {
-  //   setText('Novo');
-  // }
+    itensLocation.forEach(
+      (item) => {
+        if(item.id !== idItem) {
+          newList.push(item);
+        }
+      }
+    );
+
+    setItensLocation(newList);
+
+
+    // var listUpdated = itensLocation;
+    // var index = listUpdated.indexOf(idItem);
+
+    // if(index > -1) {
+    //   listUpdated.splice(index, 1);
+    // }
+    
+    // setItensLocation(listUpdated);
+  }
 
   const renderItem = ({item}) => {
     return (
@@ -152,8 +186,7 @@ const Dashboard: React.FC = () => {
           }
         } 
         onPress={
-          () => alert(`This is a button right! Seja bem-vindo ${user.name} ${item.id} 
-        ${itensLocation[0]} - ${itensLocation[1]} - ${itensLocation[2]} - ${itensLocation[3]} - ${itensLocation[4]} - ${itensLocation[5]} - ${itensLocation[6]} - ${itensLocation[7]} - ${itensLocation[8]} - ${itensLocation[9]} - ${itensLocation[10]}`)
+          () => alert(`This is a button right!`)
         }
       >
 
@@ -166,34 +199,15 @@ const Dashboard: React.FC = () => {
           <ContainerInfo>
             <DescriptionItem>
               <NameItem>
-                { item.title }
+                {item.id} - { item.title }
               </NameItem>
             </DescriptionItem>
 
-            <CustomTouch />
-
-            {/* <CustomTouch 
-              style={{paddingLeft: 5, paddingRight: 5}}
-              
-              onPress={                  
-                () => {                    
-                  setText([text, 'ADICIONAR']);
-                  
-                  // alert(`Botão pressionado`);
-
-                  setItensLocation([...itensLocation, item.id]);
-                }
-              }  
-            >  
-              <TextButton>{text}</TextButton>  
-                        
-              
-            </CustomTouch> */}
-            {/* <Button
-                
-                title="Adicionar"
-                color="#a9a4b7"                
-              /> */}
+            <CustomTouch 
+              idItem = {item.id} 
+              addItens = {addItem} 
+              removeItens = {removeItem} 
+            />
           </ContainerInfo>
         </ContainerItem>
       </TouchableHighlight>
@@ -224,7 +238,7 @@ const Dashboard: React.FC = () => {
               }
             }
             //onChangeText={text => onChangeText(text)}
-            placeholder="   Buscar item por nome jkkh"
+            placeholder="   Buscar item por nome"
             // value={value}
           />
         </Search>
@@ -238,6 +252,43 @@ const Dashboard: React.FC = () => {
           />
         </Container>
       </View>
+    
+
+      {/* <Button
+        onPress= {() => {
+            navigation.navigate('Solicitation', { itensLocation });
+          }         
+        }
+        title="Adicionar"
+        color="#a9a4b7"                
+      />  */}
+
+      <ButtonsArea>
+        {/* <View style={{width: 170}}> */}
+          <CustomButton style={{height: 40}}
+            onPress={
+              () => navigation.navigate('Solicitation', { itensLocation })
+            }
+          >
+            Ir para Detalhes
+          </CustomButton>
+        {/* </View> */}
+      </ButtonsArea>
+
+      {/* <Button
+        onPress= {() => {
+          console.log("<Dashboard>");
+            itensLocation.forEach(
+              (item) => {
+                console.log('>>>', item.id);               
+              }
+            );
+            console.log("<Dashboard>");
+          }         
+        }
+        title="Verificação"
+        color="red"                
+      />  */}
     </>
   );
 };

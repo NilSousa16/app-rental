@@ -13,6 +13,7 @@ import Exit from '../pages/Exit';
 
 import Success from '../pages/Success';
 import Solicitation from '../pages/Solicitation';
+import Contract from '../pages/Contract';
 
 const App = createDrawerNavigator();
 
@@ -52,15 +53,52 @@ const AppRoutes: React.FC = () => (
     }
     initialRouteName="Dashboard"
   >
-    <App.Screen name="Dashboard" component={Dashboard} />
-    <App.Screen name="Histórico" component={Historic} />
-    <App.Screen name="Devolução" component={Devolution} />
-    <App.Screen name="Troca" component={Exchange} />
-    <App.Screen name="Atualizar Cadastro" component={UpdateProfile} />
-    <App.Screen name="Sair" component={Exit} />
+    <App.Screen 
+      name="Dashboard" 
+      options={{drawerLabel: 'Dashboard',}} 
+      component={Dashboard} 
+    />
+    <App.Screen 
+      name="Historic" 
+      options={{drawerLabel: 'Histórico',}} 
+      component={Historic} 
+    />
+    <App.Screen 
+      name="Devolution" 
+      options={{drawerLabel: 'Devolução',}} 
+      component={Devolution} 
+    />
+    <App.Screen 
+      name="Change" 
+      options={{drawerLabel: 'Troca',}} 
+      component={Exchange} 
+    />
+    <App.Screen 
+      name="Update profile" 
+      options={{drawerLabel: 'Atualizar Cadastro',}} 
+      component={UpdateProfile} 
+    />
+    <App.Screen 
+      name="Exit" 
+      options={{drawerLabel: 'Sair',}} 
+      component={Exit} 
+    />
     
-    <App.Screen name="Sucesso" component={Success} />
-    <App.Screen name="Solicitação" component={Solicitation} />
+    <App.Screen 
+      name="Success" 
+      options={{drawerLabel: 'Sucesso',}} 
+      component={Success} 
+    />
+    <App.Screen 
+      name="Solicitation" 
+      options={{drawerLabel: 'Solicitação',}} 
+      component={Solicitation} 
+    />
+    <App.Screen 
+      name="Contract" 
+      options={{drawerLabel: 'Contrato',}} 
+      component={Contract} 
+    />
   </App.Navigator>
 );
 

@@ -6,7 +6,13 @@ import { StyleSheet } from 'react-native';
 
 import { CustomButton, TextButton } from './styles';
 
-const CustomTouch: React.FC = () => {
+interface MyData{
+  idItem: string,
+  addItens: Function,
+  removeItens: Function,
+}
+
+const CustomTouch: React.FC <MyData>= (props) => {
   const [textButton, setTextButton] = useState('ADICIONAR');
 
   return (
@@ -23,8 +29,8 @@ const CustomTouch: React.FC = () => {
                 } else {
                   setTextButton('ADICIONAR');
                 } 
-                
-                // setItensLocation([...itensLocation, item.id]);
+                props.addItens(props.idItem);
+                //console.log(props.idItem);
               }
             }  
           >       
@@ -41,8 +47,7 @@ const CustomTouch: React.FC = () => {
               } else {
                 setTextButton('ADICIONAR');
               } 
-              
-              // setItensLocation([...itensLocation, item.id]);
+              props.removeItens(props.idItem);              
             }
           }  
         >       
