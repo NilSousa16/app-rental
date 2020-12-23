@@ -239,6 +239,7 @@ const Dashboard: React.FC = () => {
             }
             //onChangeText={text => onChangeText(text)}
             placeholder="   Buscar item por nome"
+            placeholderTextColor="#c9c6d2"
             // value={value}
           />
         </Search>

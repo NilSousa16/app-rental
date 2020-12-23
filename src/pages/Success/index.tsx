@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 
 import { useAuth } from '../../hooks/auth';
 
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import CustomButton from '../../components/Button';
 
@@ -12,7 +12,22 @@ import { TextView, Container, ButtonsArea} from './styles';
 const Success: React.FC = () => {
   const { signOut } = useAuth();
 
+  const route = useRoute();
+
   const navigation = useNavigation();
+
+  const [listItensLocation, setListItensLocation] = useState([]);
+  
+  useEffect(() => {
+    var list = route.params.listItensLocation;
+    setListItensLocation(list);
+  }, [route.params.listItensLocation]);
+
+  listItensLocation.forEach(
+    (item) => {
+      console.log(item);
+    }
+  );
 
   return (
     <>

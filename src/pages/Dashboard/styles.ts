@@ -103,7 +103,7 @@ export const ButtonsArea = styled.View`
   padding-left: 5px;
   padding-bottom: 8px;
 
-  background-color: #312e38;;
+  background-color: #312e38;
 `;
 
 

@@ -54,12 +54,12 @@ const Contract: React.FC = () => {
 
   const navigation = useNavigation();
 
-  // const [listItensLocation, setListItensLocation] = useState([]);
+  const [listItensLocation, setListItensLocation] = useState([]);
   
-  // useEffect(() => {
-  //   var list = route.params.listItensLocation;
-  //   setListItensLocation(list);
-  // }, [route.params.listItensLocation]);
+  useEffect(() => {
+    var list = route.params.listItensLocation;
+    setListItensLocation(list);
+  }, [route.params.listItensLocation]);
 
   return (
     <>
@@ -126,7 +126,7 @@ const Contract: React.FC = () => {
             <View style={{width: 170}}>
               <CustomButton style={{height: 40}}
                 onPress={
-                  () => navigation.navigate('Success')
+                  () => navigation.navigate('Success', { listItensLocation })
                 }
               >
                 Aceitar

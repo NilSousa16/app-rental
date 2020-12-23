@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAuth } from '../../hooks/auth';
+import { AsyncStorage } from 'react-native';
 
 import { 
   Button, 
@@ -118,13 +119,29 @@ const Solicitation: React.FC = () => {
 
   const { user } = useAuth();
 
- 
-
   const navigation = useNavigation();  
 
   const route = useRoute();
 
-  const [listItensLocation, setListItensLocation] = useState([]); 
+  const [listItensLocation, setListItensLocation] = useState([]);
+  
+  const _storeData = async () => {
+    let data_object = {
+      data: '2018-08-01',
+      local: 'Rua Euclydes',
+      humidade: 40,
+    };
+
+    // Armazenando dados
+    await AsyncStorage.setItem('DATA_KEY_3', JSON.stringify(data_object));
+  };
+
+  const _retrieveData = async () => {
+    // Recuperando dados
+    const data = await AsyncStorage.getItem('DATA_KEY');
+
+    console.log(data);
+  };
 
   useEffect(() => {
       loadItensLocation();
@@ -242,6 +259,35 @@ const Solicitation: React.FC = () => {
             </View>
             
           </ButtonsArea>
+
+          {/* <ButtonsArea>
+            <View style={{width: 170}}>
+              <CustomButton style={{height: 40}}
+                onPress={
+                  () => {
+                    console.log('Entrou em armazenar');
+                    _storeData();
+                  }
+                }
+              >
+                Armazenar
+              </CustomButton>
+            </View>
+
+            <View style={{width: 170}}>
+              <CustomButton style={{height: 40}}
+                  onPress={
+                    () => {
+                      console.log('Entrou em buscar');
+                      _retrieveData();
+                    }
+                  }
+              >
+                Buscar
+              </CustomButton>
+            </View>
+            
+          </ButtonsArea> */}
         </Container>
       </View>
 
