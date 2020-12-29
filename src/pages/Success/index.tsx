@@ -23,12 +23,6 @@ const Success: React.FC = () => {
     setListItensLocation(list);
   }, [route.params.listItensLocation]);
 
-  listItensLocation.forEach(
-    (item) => {
-      console.log(item);
-    }
-  );
-
   return (
     <>
       <Container>

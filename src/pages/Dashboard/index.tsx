@@ -32,86 +32,58 @@ const PRODUCTSITENS = [
   {
     id: '1',
     title: 'Betoneira Menegotti',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '2',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '3',
     title: 'Betoneira Menegotti Prime',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '4',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '5',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '6',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '7',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '8',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '9',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '11',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '12',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '17',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '18',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
   {
     id: '19',
     title: 'Betoneira Menegotti Prime 400 Litros',
-    englishTitle: 'R$ 150,00 / dia',
-    section: 'Categoria do Produto',
   },
 ];
 

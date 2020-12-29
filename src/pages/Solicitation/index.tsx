@@ -125,23 +125,23 @@ const Solicitation: React.FC = () => {
 
   const [listItensLocation, setListItensLocation] = useState([]);
   
-  const _storeData = async () => {
-    let data_object = {
-      data: '2018-08-01',
-      local: 'Rua Euclydes',
-      humidade: 40,
-    };
+  // const _storeData = async () => {
+  //   let data_object = {
+  //     data: '2018-08-01',
+  //     local: 'Rua Euclydes',
+  //     humidade: 40,
+  //   };
 
-    // Armazenando dados
-    await AsyncStorage.setItem('DATA_KEY_3', JSON.stringify(data_object));
-  };
+  //   // Armazenando dados
+  //   await AsyncStorage.setItem('DATA_KEY_3', JSON.stringify(data_object));
+  // };
 
-  const _retrieveData = async () => {
-    // Recuperando dados
-    const data = await AsyncStorage.getItem('DATA_KEY');
+  // const _retrieveData = async () => {
+  //   // Recuperando dados
+  //   const data = await AsyncStorage.getItem('DATA_KEY');
 
-    console.log(data);
-  };
+  //   console.log(data);
+  // };
 
   useEffect(() => {
       loadItensLocation();

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SafeAreaView } from 'react-native';
 
+import { Modal, Portal, Provider } from 'react-native-paper';
+
 import { useAuth } from '../../hooks/auth';
+
+import { AsyncStorage } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
 import { 
+  Alert,
   Button, 
   View, 
   TextInput, 
@@ -17,6 +22,10 @@ import {
 
 import TopMenu from '../../components/TopMenu';
 
+import ModalComponent from '../../components/Modal';
+
+import ModalTester from '../../components/CustomModal';
+
 import { 
   Container, 
   ContainerItem, 
@@ -26,149 +35,180 @@ import {
   Search, 
   TitleText } from './styles';
 
+const ORDERHISTORY = [
+  {
+    idOrder: '4561000432651',
+    date: '12/12/2012',
+    hours: '12:25:56',
+    requestingUserName: 'Jonh Doe',
+    requestingUserId: '125.455.698-98',
+    listItens: [
+      {
+        idProduct: 19054,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 15890894,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1589874,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 15789734,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1589874,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 15789734,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      }
+    ]
+  },
+  {
+    idOrder: '4561753432651',
+    date: '12/12/2012',
+    hours: '12:25:56',
+    requestingUserName: 'Jonh Doe',
+    requestingUserCPF: '125.455.698-98',
+    listItens: [
+      {
+        idProduct: 15344,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 15444,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1544,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1564,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      }
+    ]
+  },
+  {
+    idOrder: '4598656432651',
+    date: '12/12/2012',
+    hours: '12:25:56',
+    requestingUserName: 'Jonh Doe',
+    requestingUserCPF: '125.455.698-98',
+    listItens: [
+      {
+        idProduct: 1544,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1534,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1524,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1514,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      }
+    ]
+  },
+  {
+    idOrder: '4561001432651',
+    date: '12/12/2012',
+    hours: '12:25:56',
+    requestingUserName: 'Jonh Doe',
+    requestingUserCPF: '125.455.698-98',
+    listItens: [
+      {
+        idProduct: 1524,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 423,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 2323,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 545,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      }
+    ]
+  },
+  {
+    idOrder: '23001432651',
+    date: '12/12/2012',
+    hours: '12:25:56',
+    requestingUserName: 'Jonh Doe',
+    requestingUserCPF: '125.455.698-98',
+    listItens: [
+      {
+        idProduct: 232,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 1312,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 9032,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      },
+      {
+        idProduct: 3230,
+        nameProduct: 'Betoneira Menegotti Prime 400 Litros',
+      }
+    ]
+  }   
+];
+
 const Historic: React.FC = () => {
 
-  const ORDERHISTORY = [
-    {
-      idOrder: '4561000432651',
-      date: '12/12/2012',
-      hours: '12:25:56',
-      requestingUserName: 'Jonh Doe',
-      requestingUserCPF: '125.455.698-98',
-      listItens: [
-        {
-          idProduct: 19054,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 15890894,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1589874,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 15789734,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1589874,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 15789734,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        }
-      ]
-    },
-    {
-      idOrder: '4561753432651',
-      date: '12/12/2012',
-      hours: '12:25:56',
-      requestingUserName: 'Jonh Doe',
-      requestingUserCPF: '125.455.698-98',
-      listItens: [
-        {
-          idProduct: 15344,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 15444,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1544,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1564,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        }
-      ]
-    },
-    {
-      idOrder: '4598656432651',
-      date: '12/12/2012',
-      hours: '12:25:56',
-      requestingUserName: 'Jonh Doe',
-      requestingUserCPF: '125.455.698-98',
-      listItens: [
-        {
-          idProduct: 1544,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1534,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1524,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1514,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        }
-      ]
-    },
-    {
-      idOrder: '4561001432651',
-      date: '12/12/2012',
-      hours: '12:25:56',
-      requestingUserName: 'Jonh Doe',
-      requestingUserCPF: '125.455.698-98',
-      listItens: [
-        {
-          idProduct: 1524,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 423,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 2323,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 545,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        }
-      ]
-    },
-    {
-      idOrder: '23001432651',
-      date: '12/12/2012',
-      hours: '12:25:56',
-      requestingUserName: 'Jonh Doe',
-      requestingUserCPF: '125.455.698-98',
-      listItens: [
-        {
-          idProduct: 232,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 1312,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 9032,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        },
-        {
-          idProduct: 3230,
-          nameProduct: 'Betoneira Menegotti Prime 400 Litros',
-        }
-      ]
-    }   
-  ];
+  const { user } = useAuth();  
 
-  const { user } = useAuth();
+  // const [historicSolicitation, setHistoricSolicitation] = useState({});
 
   // const navigation = useNavigation();
 
-  const [value, onChangeText] = React.useState('   Buscar pelo número do pedido');
+  const [value, onChangeText] = useState('   Buscar pelo número do pedido');
+
+  const [dataHistoric, setDataHistoric] = useState({});
+
+  async function getData() {
+    var data = await AsyncStorage.getItem(`${user.id}`);
+    setDataHistoric(JSON.parse(data));
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  // const recoverSolicitation = async () => {
+  //   var data = await AsyncStorage.getItem(`${user.id}`);
+    
+  //   setHistoricSolicitation(JSON.parse(data));
+  // }
+
+  // useEffect(() => {
+  //   recoverSolicitation();
+
+  //   async function anyNameFunction() {
+  //     const data = await AsyncStorage.getItem(`${user.id}`);
+
+  //     console.log("Dados recuperados: " + data);
+  //   }
+  //   // Execute the created function directly
+  //   anyNameFunction();    
+  // }, []);
 
   const renderOrder = ({item}) => {
     return (
@@ -180,10 +220,7 @@ const Historic: React.FC = () => {
             alignItems: 'center',
             backgroundColor: '#312e38',
           }
-        } 
-        onPress={
-          () => alert(`This is a button right! Seja bem-vindo ${user.name} ${item.id}`)
-        }
+        }         
       >
 
         <ContainerItem>
@@ -206,14 +243,26 @@ const Historic: React.FC = () => {
 
             <Text/>
           </ViewTime>
+
+          
           
           <View style={{marginTop: 5}}>
-            <Button
-              onPress={() => alert(`Botão pressionado`)}
+            < ModalTester />
+            {/* <Button
+              onPress={
+                () => 
+                Alert.alert(
+                  `Pedido ${ item.idOrder }`, 
+                  `This is a button right! Seja bem-vindo ${user.name} ${item.id}`
+                )
+              }
               title="Ver Detalhes"
               color="#a9a4b7"              
-            />
+            /> */}
+
+            
           </View>
+
         </ContainerItem>
       </TouchableHighlight>
     );
@@ -250,14 +299,29 @@ const Historic: React.FC = () => {
         <Container>
           <SafeAreaView>
             <FlatList
-              data={ORDERHISTORY}
+              data={dataHistoric.solicitations}
               renderItem={renderOrder}
+              showsVerticalScrollIndicator={true}
+              onEndReached={getData}
+              onEndReachedThreshold={0.2}
               numColumns={0}
               keyExtractor={item => item.idOrder}            
             />
           </SafeAreaView>
         </Container>
       </View>
+
+      
+
+      {/* <Button
+        onPress= {
+          () => {
+            getData();
+          }         
+        }
+        title="Atualizar"
+        color="red"                
+      />  */}
     </>
   );
 };

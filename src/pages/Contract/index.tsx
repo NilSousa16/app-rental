@@ -4,6 +4,8 @@ import { useAuth } from '../../hooks/auth';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
+import { AsyncStorage } from 'react-native';
+
 import { View } from 'react-native';
 
 import CustomButton from '../../components/Button';
@@ -48,7 +50,7 @@ const contractTerm = {
 }
 
 const Contract: React.FC = () => {
-  const { signOut } = useAuth();
+  const { user } = useAuth();  
 
   const route = useRoute();
 
@@ -56,6 +58,72 @@ const Contract: React.FC = () => {
 
   const [listItensLocation, setListItensLocation] = useState([]);
   
+  const storeOrder = async () => {
+    
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    var hours = new Date().getHours();
+    var min = new Date().getMinutes();
+    var sec = new Date().getSeconds();
+    // Id Contrado
+    // Nome da conta
+    // Data e hora
+    // lista dos pedidos
+    // montar objeto
+
+    var data = await AsyncStorage.getItem(`${user.id}`);
+
+    var idGenerated = `${user.id}`;
+
+    if(data == null){
+      console.log('>>>>>>Entrou pela primeira vez');
+      var newSolicitation = {
+        solicitations: [
+          {
+            idOrder: `${date}${month}${year}${hours}${min}${sec}`,
+            date: `${date}/${month}/${year}`,
+            hours: `${hours}:${min}:${sec}`,
+            requestingUserId: `${user.id}`,
+            requestingUserName: `${user.name}`,
+            listItens: listItensLocation,
+          }
+        ]
+      }
+      // Armazenando dados
+      await AsyncStorage.setItem(`${idGenerated}`, JSON.stringify(newSolicitation));
+
+    } else {
+      // recuperar e editar
+      
+      console.log('>>>>>>Entrou para editar');
+
+      var listSolicitations = JSON.parse(data);
+      
+      listSolicitations.solicitations.push(
+        {
+          idOrder: `${date}${month}${year}${hours}${min}${sec}`,
+          date: `${date}/${month}/${year}`,
+          hours: `${hours}:${min}:${sec}`,
+          requestingUserId: `${user.id}`,
+          requestingUserName: `${user.name}`,
+          listItens: listItensLocation,
+        }
+      );
+
+      // Armazenando dados
+      await AsyncStorage.setItem(`${idGenerated}`, JSON.stringify(listSolicitations));
+      
+    }
+
+    var updatedDate = await AsyncStorage.getItem(`${user.id}`);
+
+    var newListSolicitations = JSON.parse(updatedDate);
+
+    console.log(newListSolicitations.solicitations);
+  }
+
   useEffect(() => {
     var list = route.params.listItensLocation;
     setListItensLocation(list);
@@ -126,7 +194,10 @@ const Contract: React.FC = () => {
             <View style={{width: 170}}>
               <CustomButton style={{height: 40}}
                 onPress={
-                  () => navigation.navigate('Success', { listItensLocation })
+                  () => {
+                    storeOrder();
+                    navigation.navigate('Success', { listItensLocation });
+                  }
                 }
               >
                 Aceitar

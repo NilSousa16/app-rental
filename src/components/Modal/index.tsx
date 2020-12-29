@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Modal, Button, Text } from 'react-native';
 
-export default class App extends Component {
+export default class ModalComponent extends Component {
 
   constructor(props){
     super(props);
@@ -33,7 +33,8 @@ export default class App extends Component {
         </Modal>
 
         <Button
-          title="Clique Para Abrir Modal"
+          title="Ver Detalhes"
+          color="#a9a4b7"
           onPress={() => {
             this.setState({ isVisible: true });
           }}
@@ -45,9 +46,9 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   modal: {
     flex: 1,
