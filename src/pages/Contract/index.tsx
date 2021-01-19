@@ -76,7 +76,7 @@ const Contract: React.FC = () => {
     var data = await AsyncStorage.getItem(`${user.id}`);
 
     var idGenerated = `${user.id}`;
-
+ 
     if(data == null){
       console.log('>>>>>>Entrou pela primeira vez');
       var newSolicitation = {

@@ -19,6 +19,7 @@ const Routes: React.FC = () => {
 
   // Retorna um grupo de rotas caso o usuário esteja autenticado
   return user ? <AppRoutes /> : <AuthRoutes />;
+  // return true ? <AppRoutes /> : <AuthRoutes />;
 }
 
 export default Routes;

@@ -14,6 +14,10 @@ import Exit from '../pages/Exit';
 import Success from '../pages/Success';
 import Solicitation from '../pages/Solicitation';
 import Contract from '../pages/Contract';
+import ExchangeConfirmation from '../pages/ExchangeConfirmation';
+import DevolutionConfirmation from '../pages/DevolutionConfirmation';
+import SuccessDevolution from '../pages/SuccessDevolution';
+import SuccessExchange from '../pages/SuccessExchange';
 
 const App = createDrawerNavigator();
 
@@ -69,7 +73,7 @@ const AppRoutes: React.FC = () => (
       component={Devolution} 
     />
     <App.Screen 
-      name="Change" 
+      name="Exchange" 
       options={{drawerLabel: 'Troca',}} 
       component={Exchange} 
     />
@@ -91,13 +95,33 @@ const AppRoutes: React.FC = () => (
     />
     <App.Screen 
       name="Solicitation" 
-      options={{drawerLabel: 'Solicitação',}} 
+      options={{drawerLabel: 'Solicitação', }} 
       component={Solicitation} 
     />
     <App.Screen 
       name="Contract" 
       options={{drawerLabel: 'Contrato',}} 
       component={Contract} 
+    />
+    <App.Screen 
+      name="ExchangeConfirmation" 
+      options={{drawerLabel: 'Confirmação da Troca',}} 
+      component={ExchangeConfirmation} 
+    />
+    <App.Screen 
+      name="DevolutionConfirmation" 
+      options={{drawerLabel: 'Confirmação da Devolução',}} 
+      component={DevolutionConfirmation} 
+    />
+    <App.Screen 
+      name="SuccessDevolution" 
+      options={{drawerLabel: 'Mensagem de Sucesso da Devolução',}} 
+      component={SuccessDevolution} 
+    />
+    <App.Screen 
+      name="SuccessExchange" 
+      options={{drawerLabel: 'Mensagem de Sucesso da Troca',}} 
+      component={SuccessExchange} 
     />
   </App.Navigator>
 );

@@ -9,7 +9,10 @@ import {
   Image,
   Text,
   Linking,
+  TouchableNativeFeedback,
 } from 'react-native';
+
+import Icon from 'react-native-vector-icons/Feather';
 
 import {
   DrawerContentScrollView,
@@ -22,6 +25,45 @@ const CustomSidebarMenu = (props) => {
     'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
   const proileImage = 'react_logo.png';
 
+  //custom drawer content
+  const MyList = props => {
+    const { state, ...rest } = props;
+    const newState = { ...state}  //copy from state before applying any filter. do not change original state
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'Success')
+    ) //replace "Login' with your route name
+
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'Solicitation')
+    )
+
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'Contract')
+    )
+
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'ExchangeConfirmation')
+    )
+
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'DevolutionConfirmation')
+    )
+
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'SuccessDevolution')
+    )
+
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'SuccessExchange')
+    )
+
+    return (
+        <DrawerContentScrollView {...props}>
+            <DrawerItemList state={newState} {...rest} />
+        </DrawerContentScrollView>
+    )
+  }
+  
   return (
     <SafeAreaView style={{flex: 1}}>
       {/*Top Large Image */}
@@ -29,13 +71,17 @@ const CustomSidebarMenu = (props) => {
         source={require('../../assets/logo_text.png')}
         style={styles.sideMenuProfileIcon}
       />
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
-        <DrawerItem
+
+      {/* <DrawerContentScrollView {...props}> */}
+        {/* <DrawerItemList {...props} /> */}
+
+        <MyList {...props}/>
+        
+        {/* <DrawerItem
           label="Visit Us"
           onPress={() => Linking.openURL('https://aboutreact.com/')}
-        />
-        <View style={styles.customItem}>
+        /> */}
+        {/* <View style={styles.customItem}>
           <Text
             onPress={() => {
               Linking.openURL('https://aboutreact.com/');
@@ -46,15 +92,15 @@ const CustomSidebarMenu = (props) => {
             source={{uri: BASE_PATH + 'star_filled.png'}}
             style={styles.iconStyle}
           />
-        </View>
-      </DrawerContentScrollView>
+        </View>  */}
+      {/* </DrawerContentScrollView> */}
       <Text
         style={{
           fontSize: 16,
           textAlign: 'center',
           color: 'grey'
         }}>
-        www.family.com
+        Connect Máquinas
       </Text>
     </SafeAreaView>
   );

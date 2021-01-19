@@ -1,0 +1,29 @@
+Corrigir menu lateral >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Corrigido
+
+Erro ao carregar lista de pedidos quando vazia / erro na atualização >>>>>>> Corrigido, mas houve uma anomalia no botão de adicionar item 
+
+Criar botões para devolução / troca >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Finalizado
+
+Telas de confirmação para devolução / troca >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Finalizado
+
+Vincular telas de confirmação de devolução / troca com botões >>>>>>>>>>>>>> Finalizado
+
+Modal com mensagem de envio da solicitação de devolução / troca >>>>>>>>>>>> Finalizado
+
+Correções do cadastro do login >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Resetar estado ao concluir solicitação >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Função para envio das informações via e-mail >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+
+Verificar problemas existentes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Subir aplicação para utilização >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+######## SUBIR PRIMEIRA VERSÃO PARA TESTE INTERNO
+
+>>>> Configurar banco de dados na rede
+
+>>>> Subir back-end no netfly
+
+>>>> Subir aplicação no google play (teste interno)

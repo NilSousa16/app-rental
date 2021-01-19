@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { SafeAreaView } from 'react-native';
 
-import { Modal, Portal, Provider } from 'react-native-paper';
-
 import { useAuth } from '../../hooks/auth';
 
 import { AsyncStorage } from 'react-native';
@@ -22,9 +20,7 @@ import {
 
 import TopMenu from '../../components/TopMenu';
 
-import ModalComponent from '../../components/Modal';
-
-import ModalTester from '../../components/CustomModal';
+import CustomModalHistoric from '../../components/CustomModalHistoric';
 
 import { 
   Container, 
@@ -190,7 +186,7 @@ const Historic: React.FC = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [AsyncStorage.getItem(`${user.id}`)]);
 
   // const recoverSolicitation = async () => {
   //   var data = await AsyncStorage.getItem(`${user.id}`);
@@ -222,7 +218,6 @@ const Historic: React.FC = () => {
           }
         }         
       >
-
         <ContainerItem>
           <TitleOrder>
             Nº do Pedido { item.idOrder }
@@ -244,25 +239,16 @@ const Historic: React.FC = () => {
             <Text/>
           </ViewTime>
 
-          
-          
           <View style={{marginTop: 5}}>
-            < ModalTester />
-            {/* <Button
-              onPress={
-                () => 
-                Alert.alert(
-                  `Pedido ${ item.idOrder }`, 
-                  `This is a button right! Seja bem-vindo ${user.name} ${item.id}`
-                )
-              }
-              title="Ver Detalhes"
-              color="#a9a4b7"              
-            /> */}
-
-            
+            <CustomModalHistoric 
+              idSolicitation={item.idOrder} 
+              requestingUserName={item.requestingUserName}
+              date={item.date}
+              hours={item.hours}
+              listItens={item.listItens}
+              buttonTitle={'VER DETALHES'}
+            />
           </View>
-
         </ContainerItem>
       </TouchableHighlight>
     );

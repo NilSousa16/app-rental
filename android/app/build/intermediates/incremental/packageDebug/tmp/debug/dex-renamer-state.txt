@@ -1,4 +1,4 @@
-#Sun Nov 22 16:31:03 BRT 2020
+#Thu Jan 14 09:14:40 BRT 2021
 base.0=/home/nilson/_repositories/projects/equipment-rental/app-rental/android/app/build/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

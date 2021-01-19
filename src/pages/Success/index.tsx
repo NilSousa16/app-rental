@@ -30,7 +30,7 @@ const Success: React.FC = () => {
         <Image style={{marginBottom: 60}} source={require('../../assets/logo_text.png')} />
         
         <TextView>
-          Sua solicitação do Pedido nº 2384263876 foi concluída com sucesso!!!
+          Sua solicitação do Pedido nº {  } foi concluída com sucesso!!!
         </TextView>  
 
         <ButtonsArea>
