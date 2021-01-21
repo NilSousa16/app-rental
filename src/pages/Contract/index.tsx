@@ -79,10 +79,11 @@ const Contract: React.FC = () => {
  
     if(data == null){
       console.log('>>>>>>Entrou pela primeira vez');
+      var idOrder = `${date}${month}${year}${hours}${min}${sec}`;
       var newSolicitation = {
         solicitations: [
           {
-            idOrder: `${date}${month}${year}${hours}${min}${sec}`,
+            idOrder: idOrder,
             date: `${date}/${month}/${year}`,
             hours: `${hours}:${min}:${sec}`,
             requestingUserId: `${user.id}`,
@@ -93,17 +94,17 @@ const Contract: React.FC = () => {
       }
       // Armazenando dados
       await AsyncStorage.setItem(`${idGenerated}`, JSON.stringify(newSolicitation));
-
+      navigation.navigate('Success', { idOrder });
     } else {
       // recuperar e editar
       
       console.log('>>>>>>Entrou para editar');
 
       var listSolicitations = JSON.parse(data);
-      
+      var idOrder = `${date}${month}${year}${hours}${min}${sec}`
       listSolicitations.solicitations.push(
         {
-          idOrder: `${date}${month}${year}${hours}${min}${sec}`,
+          idOrder: idOrder,
           date: `${date}/${month}/${year}`,
           hours: `${hours}:${min}:${sec}`,
           requestingUserId: `${user.id}`,
@@ -114,7 +115,7 @@ const Contract: React.FC = () => {
 
       // Armazenando dados
       await AsyncStorage.setItem(`${idGenerated}`, JSON.stringify(listSolicitations));
-      
+      navigation.navigate('Success', { idOrder });
     }
 
     var updatedDate = await AsyncStorage.getItem(`${user.id}`);
@@ -196,7 +197,7 @@ const Contract: React.FC = () => {
                 onPress={
                   () => {
                     storeOrder();
-                    navigation.navigate('Success', { listItensLocation });
+                    // navigation.navigate('Success', { listItensLocation });
                   }
                 }
               >

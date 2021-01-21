@@ -42,4 +42,7 @@ export const BackToSignInText = styled.Text`
   margin-left: 16px;
 `;
 
+export const ViewButton = styled.View`
+  padding-left: 1%;
+`;
 

@@ -78,7 +78,7 @@ const AppRoutes: React.FC = () => (
       component={Exchange} 
     />
     <App.Screen 
-      name="Update profile" 
+      name="UpdateProfile" 
       options={{drawerLabel: 'Atualizar Cadastro',}} 
       component={UpdateProfile} 
     />

@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 
 import logoImg from '../../assets/logo.png';
 
-import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
+import { Container, Title, BackToSignIn, BackToSignInText, ViewButton } from './styles';
 
 interface SignUpFormData {
   name: string;
@@ -144,8 +144,9 @@ const SignUp: React.FC = () => {
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
-
-              <Button onPress={() => {formRef.current?.submitForm();}}>Criar</Button>
+              <ViewButton>
+                <Button onPress={() => {formRef.current?.submitForm();}}>Criar</Button>
+              </ViewButton>
             </Form>
           </Container>
         </ScrollView>

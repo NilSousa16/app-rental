@@ -57,6 +57,10 @@ const CustomSidebarMenu = (props) => {
       item => (item.name !== 'SuccessExchange')
     )
 
+    newState.routes = newState.routes.filter(
+      item => (item.name !== 'UpdateProfile')
+    )
+
     return (
         <DrawerContentScrollView {...props}>
             <DrawerItemList state={newState} {...rest} />
